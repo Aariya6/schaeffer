@@ -5,8 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:backend": "node backend/server.mjs",
     "build": "vite build",
     "lint": "eslint .",
+    "test:backend": "node --test backend/server.test.mjs",
     "preview": "vite preview"
   },
   "dependencies": {

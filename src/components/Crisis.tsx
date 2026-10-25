@@ -1,49 +1,29 @@
-import React from 'react';
-import { Phone, MessageCircle, MapPin, Clock, AlertTriangle, Heart } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { Phone, MessageCircle, Clock, AlertTriangle, Heart } from 'lucide-react';
 
 export function Crisis() {
-  const crisisResources = [
-    {
-      id: 1,
-      name: '988 Suicide & Crisis Lifeline',
-      phone: '988',
-      description: '24/7 free and confidential support for people in distress, prevention and crisis resources.',
-      available: '24/7',
-      type: 'National Hotline'
-    },
-    {
-      id: 2,
-      name: 'Crisis Text Line',
-      phone: 'Text HOME to 741741',
-      description: 'Free crisis counseling via text message available 24/7.',
-      available: '24/7',
-      type: 'Text Support'
-    },
-    {
-      id: 3,
-      name: 'SAMHSA National Helpline',
-      phone: '1-800-662-4357',
-      description: 'Treatment referral and information service for mental health and substance abuse.',
-      available: '24/7',
-      type: 'Treatment Referral'
-    },
-    {
-      id: 4,
-      name: 'National Domestic Violence Hotline',
-      phone: '1-800-799-7233',
-      description: 'Support for those experiencing domestic violence and abuse.',
-      available: '24/7',
-      type: 'Domestic Violence'
-    },
-    {
-      id: 5,
-      name: 'Veterans Crisis Line',
-      phone: '1-800-273-8255',
-      description: 'Specialized support for veterans and their families.',
-      available: '24/7',
-      type: 'Veterans Support'
-    }
-  ];
+  const [crisisResources, setCrisisResources] = useState<CrisisResource[]>([]);
+  const [resourceError, setResourceError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    fetch('/api/crisis-resources', { signal: controller.signal })
+      .then(async response => {
+        if (!response.ok) {
+          throw new Error(`Crisis resource service returned ${response.status}.`);
+        }
+        return response.json() as Promise<CrisisResource[]>;
+      })
+      .then(setCrisisResources)
+      .catch(error => {
+        if (!controller.signal.aborted) {
+          console.error('Unable to load crisis resources:', error);
+          setResourceError('The official support-contact list could not be loaded.');
+        }
+      });
+
+    return () => controller.abort();
+  }, []);
 
   const emergencySteps = [
     {
@@ -146,7 +126,8 @@ export function Crisis() {
       {/* Crisis Resources */}
       <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
         <h2 className="text-2xl font-bold text-gray-900 mb-6">24/7 Crisis Resources</h2>
-        
+        {resourceError && <p role="alert" className="mb-4 rounded bg-amber-50 p-3 text-amber-900">{resourceError} Call 911 in an immediate emergency.</p>}
+        {!resourceError && crisisResources.length === 0 && <p role="status" className="mb-4 text-gray-600">Loading official support contacts…</p>}
         <div className="space-y-4">
           {crisisResources.map((resource) => (
             <div key={resource.id} className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
@@ -168,12 +149,13 @@ export function Crisis() {
                 </div>
                 <div className="mt-4 md:mt-0 md:ml-6">
                   <a
-                    href={resource.phone.startsWith('1-') ? `tel:${resource.phone}` : resource.phone.includes('Text') ? 'sms:741741' : `tel:${resource.phone}`}
+                    href={resource.phoneHref}
                     className="bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 transition-colors font-medium flex items-center gap-2"
                   >
-                    {resource.phone.includes('Text') ? <MessageCircle className="h-4 w-4" /> : <Phone className="h-4 w-4" />}
-                    {resource.phone}
+                    <Phone className="h-4 w-4" />
+                    {resource.phoneLabel}
                   </a>
+                  <a href={resource.website} target="_blank" rel="noreferrer" className="mt-2 block text-sm text-blue-700 hover:underline">Official source</a>
                 </div>
               </div>
             </div>
@@ -218,4 +200,15 @@ export function Crisis() {
       </div>
     </div>
   );
+}
+
+interface CrisisResource {
+  id: string;
+  name: string;
+  phoneLabel: string;
+  phoneHref: string;
+  description: string;
+  available: string;
+  type: string;
+  website: string;
 }

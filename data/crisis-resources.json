@@ -1,0 +1,26 @@
+[
+  {
+    "id": "988",
+    "name": "988 Suicide & Crisis Lifeline",
+    "phone": "988",
+    "phoneLabel": "Call or text 988",
+    "phoneHref": "tel:988",
+    "description": "Free, confidential support for people in suicidal crisis or emotional distress in the United States.",
+    "available": "Call or text 988; chat online",
+    "type": "National crisis support",
+    "website": "https://988lifeline.org/",
+    "source": "https://988lifeline.org/"
+  },
+  {
+    "id": "samhsa-helpline",
+    "name": "SAMHSA National Helpline",
+    "phone": "1-800-662-HELP (4357)",
+    "phoneLabel": "Call 1-800-662-4357",
+    "phoneHref": "tel:+18006624357",
+    "description": "Free, confidential treatment referral and information for mental health and substance use disorders.",
+    "available": "24 hours a day, 365 days a year",
+    "type": "Treatment referral",
+    "website": "https://www.samhsa.gov/find-help/helplines/national-helpline",
+    "source": "https://www.samhsa.gov/find-help/helplines/national-helpline"
+  }
+]

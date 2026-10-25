@@ -1,0 +1,54 @@
+[
+  {
+    "id": "samhsa-treatment-locator",
+    "name": "SAMHSA FindTreatment.gov",
+    "categories": ["substance", "addiction", "mental", "trauma"],
+    "type": "Official treatment locator",
+    "scope": "United States",
+    "phone": null,
+    "phoneLabel": null,
+    "website": "https://findtreatment.gov/",
+    "description": "Search SAMHSA's directory for mental health and substance use treatment facilities. Contact a provider directly to confirm services, eligibility, and current availability.",
+    "services": ["Mental health treatment search", "Substance use treatment search"],
+    "source": "https://findtreatment.gov/"
+  },
+  {
+    "id": "hrsa-health-centers",
+    "name": "HRSA Find a Health Center",
+    "categories": ["mental", "physical"],
+    "type": "Official health center locator",
+    "scope": "United States",
+    "phone": null,
+    "phoneLabel": null,
+    "website": "https://findahealthcenter.hrsa.gov/",
+    "description": "Locate HRSA-supported health centers. Contact a center to ask which behavioral or physical health services it offers and what payment options are available.",
+    "services": ["Health center search", "Ask about sliding-fee policies"],
+    "source": "https://findahealthcenter.hrsa.gov/"
+  },
+  {
+    "id": "samhsa-national-helpline",
+    "name": "SAMHSA National Helpline",
+    "categories": ["substance", "addiction"],
+    "type": "Treatment referral and information",
+    "scope": "United States",
+    "phone": "+18006624357",
+    "phoneLabel": "1-800-662-HELP (4357)",
+    "website": "https://www.samhsa.gov/find-help/helplines/national-helpline",
+    "description": "SAMHSA's free, confidential treatment referral and information service for people facing mental and/or substance use disorders.",
+    "services": ["Treatment referral", "Information"],
+    "source": "https://www.samhsa.gov/find-help/helplines/national-helpline"
+  },
+  {
+    "id": "988-lifeline",
+    "name": "988 Suicide & Crisis Lifeline",
+    "categories": ["mental", "trauma"],
+    "type": "Call, text, or chat",
+    "scope": "United States",
+    "phone": "988",
+    "phoneLabel": "Call or text 988",
+    "website": "https://988lifeline.org/",
+    "description": "The 988 Lifeline provides free, confidential support for people in suicidal crisis or emotional distress. If there is immediate danger, contact emergency services.",
+    "services": ["Call 988", "Text 988", "Online chat"],
+    "source": "https://988lifeline.org/"
+  }
+]
